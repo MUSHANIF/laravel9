@@ -126,7 +126,8 @@
               <!-- /Logo -->
               <h4 class="mb-2">Forgot Password? 🔒</h4>
               <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form action="{{ route('password.email') }}" method="POST" id="formAuthentication" class="mb-3" >
+                @csrf
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input

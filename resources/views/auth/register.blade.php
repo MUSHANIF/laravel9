@@ -131,12 +131,23 @@
               <form action="{{ route('register') }}" method="POST" id="formAuthentication" class="mb-3" >
                 @csrf
                 <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
+                  <label for="username" class="form-label">Nama</label>
                   <input
                     type="text"
                     class="form-control"
                     id="username"
                     name="name"
+                    placeholder="Enter your username"
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
                     placeholder="Enter your username"
                     autofocus
                   />

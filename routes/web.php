@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\profileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +21,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('profile', profileController::class);
 
 require __DIR__.'/auth.php';
+

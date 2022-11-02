@@ -121,13 +121,16 @@ class profileController extends Controller
         return view('change' ,compact('datas'));
     }
     public function updatepw(Request $request, $id){
-        
-        $validasi = $request->validate([
+        $data = $request->all();
+        $validasi = Validator::make($data, [
             'old' => 'required',
             'new' => 'required',
             'confirm' => 'required|same:new',
         ]);
-        
+        if ($validasi->fails()) {
+            toastr()->error('gagal di ubah! ,tolong cek lagi', 'Gagal');
+            return redirect()->back();
+        }
         $hash = Auth::user()->password;
         if(Hash::check($request->old,$hash)){
             $user = User::findOrFail($id);
@@ -136,7 +139,7 @@ class profileController extends Controller
             toastr()->success('password Berhasil di ubah!', 'Sukses');
             return redirect()->back();
         }else{
-            toastr()->warning('gagal di ubah!', 'Sukses');
+            toastr()->error('gagal di ubah! ,tolong cek lagi', 'Gagal');
             return redirect()->back();
         }
      }

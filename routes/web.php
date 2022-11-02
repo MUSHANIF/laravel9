@@ -22,6 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('profile', profileController::class);
-
+Route::get('/change/{id}', [profileController::class, 'change']);
+Route::post('/update/{id}', [profileController::class, 'updatepw'])->name('updatepw');
 require __DIR__.'/auth.php';
 

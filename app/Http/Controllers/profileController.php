@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class profileController extends Controller
@@ -113,4 +115,29 @@ class profileController extends Controller
     {
         //
     }
+    public function change($id){
+
+       $datas = User::where('id',$id)->first();
+        return view('change' ,compact('datas'));
+    }
+    public function updatepw(Request $request, $id){
+        
+        $validasi = $request->validate([
+            'old' => 'required',
+            'new' => 'required',
+            'confirm' => 'required|same:new',
+        ]);
+        
+        $hash = Auth::user()->password;
+        if(Hash::check($request->old,$hash)){
+            $user = User::findOrFail($id);
+            $user->password = bcrypt($request->new);
+            $user->save();
+            toastr()->success('password Berhasil di ubah!', 'Sukses');
+            return redirect()->back();
+        }else{
+            toastr()->warning('gagal di ubah!', 'Sukses');
+            return redirect()->back();
+        }
+     }
 }

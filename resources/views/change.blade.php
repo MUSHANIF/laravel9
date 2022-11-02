@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('isi')
 <div class="card mb-4">
-    <h5 class="card-header">Profile Details</h5>
+    <h5 class="card-header">Change Password</h5>
     <!-- Account -->
-    <div class="card-body">
+    {{-- <div class="card-body">
       <div class="d-flex align-items-start align-items-sm-center gap-4">
         @if (Auth::user()->image  == NULL)
         <img
@@ -42,42 +42,35 @@
           </label>
         
 
-          {{-- <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p> --}}
+          
         </div>
       </div>
-    </div>
+    </div> --}}
     <hr class="my-0" />
     <div class="card-body">
-    
-        <input type="hidden" name="_method" value="PATCH">
+        <form action="{{ route('updatepw',$datas->id) }}" method="POST"   id="formAccountSettings"   >
+            @csrf
         <div class="row">
-          <div class="mb-3 col-md-6">
-            <label for="firstName" class="form-label">Name</label>
+          <div class="mb-3 col-md-12">
+            <label for="lastName" class="form-label">Old Password</label>
+            <input class="form-control" type="password" name="old" id="lastName"  placeholder="Old password" />
+          </div>
+          
+          <div class="mb-3 col-md-12">
+            <label for="email" class="form-label">New Password</label>
             <input
               class="form-control"
-              type="text"
-              id="name"
-              name="name"
-              value="{{ $datas->name }}"
-              autofocus
-              required
-            />
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="lastName" class="form-label">Username</label>
-            <input class="form-control" type="text" name="username" id="lastName" value="{{ $datas->username }}"  re/>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="email" class="form-label">E-mail</label>
-            <input
-              class="form-control"
-              type="email"
+              type="password"
               id="email"
-              name="email"
-              value="{{ $datas->email }}"
-              placeholder="john.doe@example.com"
+              name="new"
+              {{-- value="{{ $datas->email }}" --}}
+              placeholder="New password"
               required
             />
+          </div>
+          <div class="mb-3 col-md-12">
+            <label for="lastName" class="form-label">Confirm Password</label>
+            <input class="form-control" type="password" name="confirm" id="lastName"  placeholder="Confirm password" />
           </div>
      
          
